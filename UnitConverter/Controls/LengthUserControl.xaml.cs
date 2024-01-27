@@ -23,7 +23,7 @@ namespace UnitConverter
     /// </summary>
     public partial class LengthUserControl : UserControl
     {
-        List<UnitInfo> lengthUnits = new();
+        List<UnitInfo<ConversionFactors.LengthUnit>> lengthUnits = new();
         public LengthUserControl()
         {
             InitializeComponent();
@@ -35,14 +35,14 @@ namespace UnitConverter
         {
             //this is the poor part, I can add these to a text list then for each them later, there are several option, for now we will do it hardcoded, this is a bad practice, don't do as I do.
             //what I should do is make each a type so I can do a "if in is x and to is y then conversion factor = z. I'll sort this later.
-            lengthUnits.Add(new("mm", "millimeters (mm)"));
-            lengthUnits.Add(new("cm", "centimeters (cm)"));
-            lengthUnits.Add(new("m", "meters (m)"));
-            lengthUnits.Add(new("km", "kilometers (km)"));
-            lengthUnits.Add(new("ft", "feet (ft)"));
-            lengthUnits.Add(new("in", "inches"));
-            lengthUnits.Add(new("yd", "yards (yd)"));
-            lengthUnits.Add(new("mi", "Miles-US) (mi)"));
+            lengthUnits.Add(new("mm", "millimeters (mm)", ConversionFactors.LengthUnit.Millimeter));
+            lengthUnits.Add(new("cm", "centimeters (cm)", ConversionFactors.LengthUnit.Centimeter));
+            lengthUnits.Add(new("m", "meters (m)", ConversionFactors.LengthUnit.Meter));
+            lengthUnits.Add(new("km", "kilometers (km)", ConversionFactors.LengthUnit.Kilometer));
+            lengthUnits.Add(new("ft", "feet (ft)", ConversionFactors.LengthUnit.Foot));
+            lengthUnits.Add(new("in", "inches", ConversionFactors.LengthUnit.Inch));
+            lengthUnits.Add(new("yd", "yards (yd)", ConversionFactors.LengthUnit.Yard));
+            lengthUnits.Add(new("mi", "Miles-US) (mi)", ConversionFactors.LengthUnit.Mile));
         }
 
         private void convertButton_Click(object sender, RoutedEventArgs e)
@@ -52,44 +52,48 @@ namespace UnitConverter
             float.TryParse(fromTextBox.Text, out inputValue);
             if (inputValue != 0f)
             {
-                ConversionFactors factors = new();
-                decimal testval = GetConversion(inputValue);
-                Debug.WriteLine(testval);
-                ToTextBox.Text = (testval).ToString();
+                ConversionFactors conversion = new();
+                UnitInfo<ConversionFactors.LengthUnit> fromUnit = fromSelection.SelectedItem as UnitInfo<ConversionFactors.LengthUnit>;
+                UnitInfo<ConversionFactors.LengthUnit> toUnit = toSelection.SelectedItem as UnitInfo<ConversionFactors.LengthUnit>;
+
+                if (fromUnit != null && toUnit != null)
+                {
+                    ToTextBox.Text = conversion.Convert((decimal)inputValue, fromUnit.Unit, toUnit.Unit, conversion.GetLengthTable()).ToString();
+                }
             }
             //ToTextBox.Text = multiFact * 
         }
-        private decimal GetConversion(float inputValue)
-        {
-            decimal factor = 0m;
-            if (fromSelection.SelectedItem == null)
-            {
-                return factor;
-            }
-            //get the selected unit abbreviation
-            if(fromSelection.SelectedItem is UnitInfo selectedUnit)
-            {
-                ConversionFactors factors = new();
-                string fromUnit = selectedUnit.Abbreviation;
-                string? toUnit = default;
-                if (toSelection != null && toSelection.SelectedItem is UnitInfo convertedUnit)
-                {
-                    toUnit = convertedUnit.Abbreviation;
-                }
-                if(toUnit != null)
-                {
-                    return (decimal)factors.Convert((decimal)inputValue, factors.GetLengthUnit(fromUnit), factors.GetLengthUnit(toUnit));
+        //private decimal GetConversion(float inputValue)
+        //{
+        //    decimal factor = 0m;
+        //    if (fromSelection.SelectedItem == null)
+        //    {
+        //        return factor;
+        //    }
+        //    //get the selected unit abbreviation
+        //    if(fromSelection.SelectedItem is UnitInfo<ConversionFactors.LengthUnit> selectedUnit)
+        //    {
+        //        ConversionFactors factors = new();
+        //        string fromUnit = selectedUnit.Abbreviation;
+        //        string? toUnit = default;
+        //        if (toSelection != null && toSelection.SelectedItem is UnitInfo<ConversionFactors.LengthUnit> convertedUnit)
+        //        {
+        //            toUnit = convertedUnit.Abbreviation;
+        //        }
+        //        if(toUnit != null)
+        //        {
+        //            return (decimal)factors.Convert((decimal)inputValue, factors.GetLengthUnit(fromUnit), factors.GetLengthUnit(toUnit), factors.GetLengthTable());
 
-                }
+        //        }
                 
                 
 
-                return factor;
-            }
+        //        return factor;
+        //    }
 
             
-            return 0m;
-        }
+        //    return 0m;
+        //}
 
         private void returnButton_Click(object sender, RoutedEventArgs e)
         {

@@ -21,7 +21,7 @@ namespace UnitConverter.Controls
     /// </summary>
     public partial class AreaConversionControl : UserControl
     {
-        List<UnitInfo> unitList = new();
+        List<UnitInfo<ConversionFactors.AreaUnit>> unitList = new();
         public AreaConversionControl()
         {
             InitializeComponent();
@@ -32,13 +32,14 @@ namespace UnitConverter.Controls
         }
         public void PopulateUnitList()
         {
-            unitList.Add(new("in", "Square Inch"));
-            unitList.Add(new("ft", "Square foot"));
-            unitList.Add(new("mi", "Square Mile"));
-            unitList.Add(new("mm", "Square Millimeter"));
-            unitList.Add(new("cm", "Square Centimeter"));
-            unitList.Add(new("m", "Square Meter"));
-            unitList.Add(new("km", "Square Kilometer"));
+            unitList.Add(new("in", "Square Inch", ConversionFactors.AreaUnit.SquareInch));
+            unitList.Add(new("ft", "Square foot", ConversionFactors.AreaUnit.SquareFoot));
+            unitList.Add(new("yd", "Square yard", ConversionFactors.AreaUnit.SquareYard));
+            unitList.Add(new("mi", "Square Mile", ConversionFactors.AreaUnit.SquareMile));
+            unitList.Add(new("mm", "Square Millimeter", ConversionFactors.AreaUnit.SquareMillimeter));
+            unitList.Add(new("cm", "Square Centimeter", ConversionFactors.AreaUnit.SquareCentimeter));
+            unitList.Add(new("m", "Square Meter", ConversionFactors.AreaUnit.SquareMeter));
+            unitList.Add(new("km", "Square Kilometer", ConversionFactors.AreaUnit.SquareKilometer));
         }
 
         private void convertButton_Click(object sender, RoutedEventArgs e)
@@ -51,11 +52,11 @@ namespace UnitConverter.Controls
                 //we have a value to convert, now we need to determine which entry from the list to use, Let's see if we can do this a better way for the future.
                 //now to try to convert
                 ConversionFactors conversions = new();
-                UnitInfo fromUnit = fromSelection.SelectedItem as UnitInfo;
-                UnitInfo toUnit = toSelection.SelectedItem as UnitInfo;
+                UnitInfo<ConversionFactors.AreaUnit> fromUnit = fromSelection.SelectedItem as UnitInfo<ConversionFactors.AreaUnit>;
+                UnitInfo<ConversionFactors.AreaUnit> toUnit = toSelection.SelectedItem as UnitInfo<ConversionFactors.AreaUnit>;
                 if (fromUnit != null && toUnit != null)
                 {
-                    ToTextBox.Text = conversions.Convert((decimal)valToConvert, conversions.GetAreaUnit(fromUnit.Abbreviation), conversions.GetAreaUnit(toUnit.Abbreviation)).ToString();
+                    ToTextBox.Text = conversions.Convert((decimal)valToConvert, fromUnit.Unit, toUnit.Unit, conversions.GetAreaTable()).ToString();
                 }
 
             }

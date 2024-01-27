@@ -40,5 +40,11 @@ namespace UnitConverter
             AreaConversionControl areaControl = new();
             contentControl.Content = areaControl;
         }
+
+        private void catVolume_Click(object sender, RoutedEventArgs e)
+        {
+            VolumeControl volumeControl = new();
+            contentControl.Content = volumeControl;
+        }
     }
 }
