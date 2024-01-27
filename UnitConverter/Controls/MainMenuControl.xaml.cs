@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UnitConverter.Controls;
 
 namespace UnitConverter
 {
@@ -32,6 +33,12 @@ namespace UnitConverter
         {
             LengthUserControl lengthPage = new();
             contentControl.Content = lengthPage;
+        }
+
+        private void catArea_Click(object sender, RoutedEventArgs e)
+        {
+            AreaConversionControl areaControl = new();
+            contentControl.Content = areaControl;
         }
     }
 }

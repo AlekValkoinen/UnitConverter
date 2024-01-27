@@ -21,6 +21,28 @@ namespace UnitConverter.Helpers
             Yard,
             Mile
         }
+        public enum AreaUnit
+        {
+            SquareInch,
+            SquareFoot,
+            SquareYard,
+            SquareMile,
+            SquareMillimeter,
+            SquareCentimeter,
+            SquareMeter,
+            SquareKilometer
+        }
+        private static readonly Dictionary<AreaUnit, BigInteger> AreaConversionTable = new Dictionary<AreaUnit, BigInteger>
+    {
+        { AreaUnit.SquareMillimeter, 1 },
+        { AreaUnit.SquareCentimeter, 100 },
+        { AreaUnit.SquareMeter, 1000000 },
+        { AreaUnit.SquareKilometer, 1000000000000 },
+        { AreaUnit.SquareInch, 64516 },
+        { AreaUnit.SquareFoot, 9290304 },
+        { AreaUnit.SquareYard, 83612736 },
+        { AreaUnit.SquareMile, 2589988110336 }
+    };
         //preserve the original so I can revert We are going to convert to big ints, and only work with deci when strictly needed (for fractional conversions where we get a zero back from big int)
         //private static readonly Dictionary<LengthUnit, decimal> ConversionTable = new Dictionary<LengthUnit, decimal>
         //{
@@ -75,6 +97,23 @@ namespace UnitConverter.Helpers
 
             throw new InvalidOperationException($"Unsupported units: {fromUnit} to {toUnit}");
         }
+        //Doing the bad, we're going to overload the convert method
+        public decimal Convert(decimal value, AreaUnit fromUnit, AreaUnit toUnit)
+        {
+            if (AreaConversionTable.TryGetValue(toUnit, out BigInteger toConversionFactor) &&
+                AreaConversionTable.TryGetValue(fromUnit, out BigInteger fromConversionFactor))
+            {
+                BigInteger result = (BigInteger)value * fromConversionFactor / toConversionFactor;
+                if (result == 0)
+                {
+                    decimal result2 = value * ((decimal)fromConversionFactor / (decimal)toConversionFactor);
+                    return result2;
+                }
+                return (decimal)result;
+            }
+
+            throw new InvalidOperationException($"Unsupported units: {fromUnit} to {toUnit}");
+        }
         public ConversionFactors.LengthUnit GetLengthUnit(string toUnit)
         {
             if (toUnit == "mm")
@@ -112,8 +151,43 @@ namespace UnitConverter.Helpers
             return LengthUnit.Millimeter;
         }
 
+        public ConversionFactors.AreaUnit GetAreaUnit(string toUnit)
+        {
+            if (toUnit == "mm")
+            {
+                return AreaUnit.SquareMillimeter;
+            }
+            if (toUnit == "cm")
+            {
+                return AreaUnit.SquareCentimeter;
+            }
+            if (toUnit == "m")
+            {
+                return AreaUnit.SquareMeter;
+            }
+            if (toUnit == "km")
+            {
+                return AreaUnit.SquareKilometer;
+            }
+            if (toUnit == "in")
+            {
+                return AreaUnit.SquareInch;
+            }
+            if (toUnit == "ft")
+            {
+                return AreaUnit.SquareFoot;
+            }
+            if (toUnit == "yd")
+            {
+                return AreaUnit.SquareYard;
+            }
+            if (toUnit == "mi")
+            {
+                return AreaUnit.SquareMile;
+            }
+            return AreaUnit.SquareMillimeter;
+        }
 
-            
     }
     //works but too much like actual work, not readable, and generally just bad practice, replace this madness.
     //internal class ConversionFactors

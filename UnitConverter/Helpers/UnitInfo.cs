@@ -15,6 +15,7 @@ namespace UnitConverter
         {
             Abbreviation = abbreviation;
             Description = description;
+            
         }
     }
 }
