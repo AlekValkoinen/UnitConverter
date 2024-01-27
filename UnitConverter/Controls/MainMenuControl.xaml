@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="UnitConverter.MainMenuControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UnitConverter"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <DockPanel LastChildFill="True">
+        <Frame Name="contentFrame" NavigationUIVisibility="Hidden"/>
+        <Label DockPanel.Dock="Top" Content="Select a Category to continue." FontSize="30" HorizontalAlignment="Center" Margin="0,100,0,0"></Label>
+        <UniformGrid Name="stackLeft" DockPanel.Dock="Left" Columns="1" Width="955" Margin="0,0,0,10">
+            <Button Name="catLength" Content="Length" FontSize="36" Margin="0,50,0,0" Click="catLength_Click"></Button>
+            <Button Name="catArea" Content="Area" FontSize="36" Margin="0,50,0,0"></Button>
+            <Button Name="catVolume" Content="Volume" FontSize="36" Margin="0,50,0,0"></Button>
+            <Button Name="catMass" Content="Mass/Weight" FontSize="36" Margin="0,50,0,0"></Button>
+            <Button Name="catTemp" Content="Temp" FontSize="36" Margin="0,50,0,0"></Button>
+            <Button Name="catTime" Content="Time" FontSize="36" Margin="0,50,0,0"></Button>
+        </UniformGrid>
+        <UniformGrid Name="stackRight" DockPanel.Dock="Right" Columns="1" Width="955" Margin="0,0,0,10">
+            <Button Name="catSpeed" Content="Speed" FontSize="36" Margin="0,50,0,0"></Button>
+            <Button Name="catPressure" Content="Pressure" FontSize="36" Margin="0,50,0,0"></Button>
+            <Button Name="catDigitalStorage" Content="Digital Storage" FontSize="36" Margin="0,50,0,0"></Button>
+            <Button Name="catFuelEfficiency" Content="Fuel Efficiency" FontSize="36" Margin="0,50,0,0"></Button>
+            <Button Name="catEnergy" Content="Energy" FontSize="36" Margin="0,50,0,0"></Button>
+            <Button Name="catCurrency" Content="Currency" FontSize="36" Margin="0,50,0,0"></Button>
+        </UniformGrid>
+
+    </DockPanel>
+</UserControl>
