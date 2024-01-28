@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UnitConverter.Controls;
+using UnitConverter.Helpers;
 
 namespace UnitConverter
 {
@@ -31,20 +32,27 @@ namespace UnitConverter
 
         private void catLength_Click(object sender, RoutedEventArgs e)
         {
-            LengthUserControl lengthPage = new(contentControl);
-            contentControl.Content = lengthPage;
+            //LengthUserControl lengthPage = new(contentControl);
+            GenericConversionControl lengthControl = new(contentControl, ConversionModes.ConversionMode.Length);
+            contentControl.Content = lengthControl;
         }
 
         private void catArea_Click(object sender, RoutedEventArgs e)
         {
-            AreaConversionControl areaControl = new(contentControl);
+            GenericConversionControl areaControl = new(contentControl, ConversionModes.ConversionMode.Area);
             contentControl.Content = areaControl;
         }
 
         private void catVolume_Click(object sender, RoutedEventArgs e)
         {
-            VolumeControl volumeControl = new(contentControl);
+            GenericConversionControl volumeControl = new(contentControl, ConversionModes.ConversionMode.Volume);
             contentControl.Content = volumeControl;
+        }
+
+        private void catMass_Click(object sender, RoutedEventArgs e)
+        {
+            GenericConversionControl massControl = new(contentControl, ConversionModes.ConversionMode.Mass);
+            contentControl.Content = massControl;
         }
     }
 }

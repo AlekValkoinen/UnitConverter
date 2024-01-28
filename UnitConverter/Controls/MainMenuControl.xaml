@@ -13,7 +13,7 @@
             <Button Name="catLength" Content="Length" FontSize="36" Margin="0,50,0,0" Click="catLength_Click"></Button>
             <Button Name="catArea" Content="Area" FontSize="36" Margin="0,50,0,0" Click="catArea_Click"></Button>
             <Button Name="catVolume" Content="Volume" FontSize="36" Margin="0,50,0,0" Click="catVolume_Click"></Button>
-            <Button Name="catMass" Content="Mass/Weight" FontSize="36" Margin="0,50,0,0"></Button>
+            <Button Name="catMass" Content="Mass/Weight" FontSize="36" Margin="0,50,0,0" Click="catMass_Click"></Button>
             <Button Name="catTemp" Content="Temp" FontSize="36" Margin="0,50,0,0"></Button>
             <Button Name="catTime" Content="Time" FontSize="36" Margin="0,50,0,0"></Button>
         </UniformGrid>

@@ -34,14 +34,14 @@ namespace UnitConverter.Controls
         }
         public void PopulateUnitList()
         {
-            unitList.Add(new("in", "Square Inch", ConversionFactors.AreaUnit.SquareInch));
-            unitList.Add(new("ft", "Square foot", ConversionFactors.AreaUnit.SquareFoot));
-            unitList.Add(new("yd", "Square yard", ConversionFactors.AreaUnit.SquareYard));
-            unitList.Add(new("mi", "Square Mile", ConversionFactors.AreaUnit.SquareMile));
-            unitList.Add(new("mm", "Square Millimeter", ConversionFactors.AreaUnit.SquareMillimeter));
-            unitList.Add(new("cm", "Square Centimeter", ConversionFactors.AreaUnit.SquareCentimeter));
-            unitList.Add(new("m", "Square Meter", ConversionFactors.AreaUnit.SquareMeter));
-            unitList.Add(new("km", "Square Kilometer", ConversionFactors.AreaUnit.SquareKilometer));
+            //unitList.Add(new("Square Inch", ConversionFactors.AreaUnit.SquareInch));
+            //unitList.Add(new("Square foot", ConversionFactors.AreaUnit.SquareFoot));
+            //unitList.Add(new("Square yard", ConversionFactors.AreaUnit.SquareYard));
+            //unitList.Add(new("Square Mile", ConversionFactors.AreaUnit.SquareMile));
+            //unitList.Add(new("Square Millimeter", ConversionFactors.AreaUnit.SquareMillimeter));
+            //unitList.Add(new("Square Centimeter", ConversionFactors.AreaUnit.SquareCentimeter));
+            //unitList.Add(new("Square Meter", ConversionFactors.AreaUnit.SquareMeter));
+            //unitList.Add(new("Square Kilometer", ConversionFactors.AreaUnit.SquareKilometer));
         }
 
         private void convertButton_Click(object sender, RoutedEventArgs e)

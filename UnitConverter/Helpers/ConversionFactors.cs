@@ -32,18 +32,6 @@ namespace UnitConverter.Helpers
             SquareMeter,
             SquareKilometer
         }
-        private static readonly Dictionary<AreaUnit, BigInteger> AreaConversionTable = new Dictionary<AreaUnit, BigInteger>
-    {
-        { AreaUnit.SquareMillimeter, 1 },
-        { AreaUnit.SquareCentimeter, 100 },
-        { AreaUnit.SquareMeter, 1000000 },
-        { AreaUnit.SquareKilometer, 1000000000000 },
-        { AreaUnit.SquareInch, 64516 },
-        { AreaUnit.SquareFoot, 9290304 },
-        { AreaUnit.SquareYard, 83612736 },
-        { AreaUnit.SquareMile, 2589988110336 }
-    };
-        //Yet another Enum, yay, This one for volumes
         public enum VolumeUnit
         {
             CubicMeter,
@@ -55,6 +43,39 @@ namespace UnitConverter.Helpers
             CubicFoot,
             CubicYard
         }
+        public enum MassUnit
+        {
+            Milligram,
+            Gram,
+            Kilogram,
+            Ounce,
+            Pound,
+            Stone
+        }
+
+        private static readonly Dictionary<MassUnit, BigInteger> MassConversionTable = new Dictionary<MassUnit, BigInteger>
+        {
+            { MassUnit.Milligram, 1},
+            { MassUnit.Gram, 1000 },
+            { MassUnit.Kilogram, 1000000 },
+            { MassUnit.Ounce, 28350 },
+            { MassUnit.Pound, 453600 },
+            { MassUnit.Stone, 6350400 }
+        };
+
+        private static readonly Dictionary<AreaUnit, BigInteger> AreaConversionTable = new Dictionary<AreaUnit, BigInteger>
+        {
+            { AreaUnit.SquareMillimeter, 1 },
+            { AreaUnit.SquareCentimeter, 100 },
+            { AreaUnit.SquareMeter, 1000000 },
+            { AreaUnit.SquareKilometer, 1000000000000 },
+            { AreaUnit.SquareInch, 64516 },
+            { AreaUnit.SquareFoot, 9290304 },
+            { AreaUnit.SquareYard, 83612736 },
+            { AreaUnit.SquareMile, 2589988110336 }
+        };
+        //Yet another Enum, yay, This one for volumes
+
         //some values may be off, I might need to use a smaller base unit to increase accuracy but for now this will do for approx.
         private static readonly Dictionary<VolumeUnit, BigInteger> VolumeConversionTable = new Dictionary<VolumeUnit, BigInteger>
         {
@@ -97,14 +118,14 @@ namespace UnitConverter.Helpers
 
         private static readonly Dictionary<LengthUnit, BigInteger> ConversionTable = new Dictionary<LengthUnit, BigInteger>
     {
-        { LengthUnit.Millimeter, 1 },
-        { LengthUnit.Centimeter, 10 },
-        { LengthUnit.Meter, 1000 },
-        { LengthUnit.Kilometer, 1000000 },
-        { LengthUnit.Inch, 25400 },
-        { LengthUnit.Foot, 304800 },
-        { LengthUnit.Yard, 914400 },
-        { LengthUnit.Mile, 1609344000 }
+        { LengthUnit.Millimeter, 10 },
+        { LengthUnit.Centimeter, 100 },
+        { LengthUnit.Meter, 10000 },
+        { LengthUnit.Kilometer, 10000000 },
+        { LengthUnit.Inch, 254 },
+        { LengthUnit.Foot, 3048 },
+        { LengthUnit.Yard, 9144 },
+        { LengthUnit.Mile, 16093440 }
     };
 
         // allow access to the dicts
@@ -119,6 +140,10 @@ namespace UnitConverter.Helpers
         public Dictionary<VolumeUnit, BigInteger> GetVolumeTable()
         {
             return VolumeConversionTable;
+        }
+        public Dictionary<MassUnit, BigInteger> GetMassTable()
+        {
+            return MassConversionTable;
         }
 
         //genericized this stuff so I can in theory use the same function as long as I have an Enum and a Dict

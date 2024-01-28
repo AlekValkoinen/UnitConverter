@@ -37,14 +37,14 @@ namespace UnitConverter
         {
             //this is the poor part, I can add these to a text list then for each them later, there are several option, for now we will do it hardcoded, this is a bad practice, don't do as I do.
             //what I should do is make each a type so I can do a "if in is x and to is y then conversion factor = z. I'll sort this later.
-            lengthUnits.Add(new("mm", "millimeters (mm)", ConversionFactors.LengthUnit.Millimeter));
-            lengthUnits.Add(new("cm", "centimeters (cm)", ConversionFactors.LengthUnit.Centimeter));
-            lengthUnits.Add(new("m", "meters (m)", ConversionFactors.LengthUnit.Meter));
-            lengthUnits.Add(new("km", "kilometers (km)", ConversionFactors.LengthUnit.Kilometer));
-            lengthUnits.Add(new("ft", "feet (ft)", ConversionFactors.LengthUnit.Foot));
-            lengthUnits.Add(new("in", "inches", ConversionFactors.LengthUnit.Inch));
-            lengthUnits.Add(new("yd", "yards (yd)", ConversionFactors.LengthUnit.Yard));
-            lengthUnits.Add(new("mi", "Miles-US) (mi)", ConversionFactors.LengthUnit.Mile));
+            //lengthUnits.Add(new("millimeters (mm)", ConversionFactors.LengthUnit.Millimeter));
+            //lengthUnits.Add(new("centimeters (cm)", ConversionFactors.LengthUnit.Centimeter));
+            //lengthUnits.Add(new("meters (m)", ConversionFactors.LengthUnit.Meter));
+            //lengthUnits.Add(new("kilometers (km)", ConversionFactors.LengthUnit.Kilometer));
+            //lengthUnits.Add(new("feet (ft)", ConversionFactors.LengthUnit.Foot));
+            //lengthUnits.Add(new("inches", ConversionFactors.LengthUnit.Inch));
+            //lengthUnits.Add(new("yards (yd)", ConversionFactors.LengthUnit.Yard));
+            //lengthUnits.Add(new("Miles-US) (mi)", ConversionFactors.LengthUnit.Mile));
         }
 
         private void convertButton_Click(object sender, RoutedEventArgs e)

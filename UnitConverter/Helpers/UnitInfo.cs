@@ -46,14 +46,14 @@ namespace UnitConverter
     //genercize this stuff, so I don't have to keep adding code That is per case use
     public class UnitInfo<TUnit>
     {
-        public string Abbreviation { get; set; }
+        //public string Abbreviation { get; set; }
         public string Description { get; set; }
         public TUnit Unit { get; set; }
 
         // Constructor
-        public UnitInfo(string abbreviation, string description, TUnit unit)
+        public UnitInfo(string description, TUnit unit)
         {
-            Abbreviation = abbreviation;
+            //Abbreviation = abbreviation;
             Description = description;
             Unit = unit;
         }
