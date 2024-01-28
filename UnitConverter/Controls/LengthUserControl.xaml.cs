@@ -24,9 +24,11 @@ namespace UnitConverter
     public partial class LengthUserControl : UserControl
     {
         List<UnitInfo<ConversionFactors.LengthUnit>> lengthUnits = new();
-        public LengthUserControl()
+        ContentControl Controller;
+        public LengthUserControl(ContentControl controller)
         {
             InitializeComponent();
+            Controller = controller;
             populateUnits();
             fromSelection.ItemsSource = lengthUnits;
             toSelection.ItemsSource = lengthUnits;
@@ -61,43 +63,11 @@ namespace UnitConverter
                     ToTextBox.Text = conversion.Convert((decimal)inputValue, fromUnit.Unit, toUnit.Unit, conversion.GetLengthTable()).ToString();
                 }
             }
-            //ToTextBox.Text = multiFact * 
         }
-        //private decimal GetConversion(float inputValue)
-        //{
-        //    decimal factor = 0m;
-        //    if (fromSelection.SelectedItem == null)
-        //    {
-        //        return factor;
-        //    }
-        //    //get the selected unit abbreviation
-        //    if(fromSelection.SelectedItem is UnitInfo<ConversionFactors.LengthUnit> selectedUnit)
-        //    {
-        //        ConversionFactors factors = new();
-        //        string fromUnit = selectedUnit.Abbreviation;
-        //        string? toUnit = default;
-        //        if (toSelection != null && toSelection.SelectedItem is UnitInfo<ConversionFactors.LengthUnit> convertedUnit)
-        //        {
-        //            toUnit = convertedUnit.Abbreviation;
-        //        }
-        //        if(toUnit != null)
-        //        {
-        //            return (decimal)factors.Convert((decimal)inputValue, factors.GetLengthUnit(fromUnit), factors.GetLengthUnit(toUnit), factors.GetLengthTable());
-
-        //        }
-                
-                
-
-        //        return factor;
-        //    }
-
-            
-        //    return 0m;
-        //}
-
         private void returnButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MainMenuControl mainMenu = new(Controller);
+            Controller.Content = mainMenu;
         }
     }
 }

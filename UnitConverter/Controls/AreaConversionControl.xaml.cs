@@ -22,9 +22,11 @@ namespace UnitConverter.Controls
     public partial class AreaConversionControl : UserControl
     {
         List<UnitInfo<ConversionFactors.AreaUnit>> unitList = new();
-        public AreaConversionControl()
+        ContentControl Controller;
+        public AreaConversionControl(ContentControl controller)
         {
             InitializeComponent();
+            Controller = controller;
             PopulateUnitList();
             fromSelection.ItemsSource = unitList;
             toSelection.ItemsSource = unitList;
@@ -64,7 +66,9 @@ namespace UnitConverter.Controls
 
         private void returnButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MainMenuControl menu;
+            menu = new MainMenuControl(Controller);
+            Controller.Content = menu;
         }
     }
 }

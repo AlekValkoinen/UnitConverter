@@ -22,9 +22,11 @@ namespace UnitConverter.Controls
     public partial class VolumeControl : UserControl
     {
         List<UnitInfo<ConversionFactors.VolumeUnit>> units = new();
-        public VolumeControl()
+        ContentControl Controller;
+        public VolumeControl(ContentControl controller)
         {
             InitializeComponent();
+            Controller = controller;
             PopulateUnitList();
             fromSelection.ItemsSource = units;
             toSelection.ItemsSource = units;
@@ -63,7 +65,8 @@ namespace UnitConverter.Controls
 
         private void returnButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MainMenuControl mainMenu = new(Controller);
+            Controller.Content = mainMenu;
         }
     }
 }

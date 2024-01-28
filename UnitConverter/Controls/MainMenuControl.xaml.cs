@@ -31,19 +31,19 @@ namespace UnitConverter
 
         private void catLength_Click(object sender, RoutedEventArgs e)
         {
-            LengthUserControl lengthPage = new();
+            LengthUserControl lengthPage = new(contentControl);
             contentControl.Content = lengthPage;
         }
 
         private void catArea_Click(object sender, RoutedEventArgs e)
         {
-            AreaConversionControl areaControl = new();
+            AreaConversionControl areaControl = new(contentControl);
             contentControl.Content = areaControl;
         }
 
         private void catVolume_Click(object sender, RoutedEventArgs e)
         {
-            VolumeControl volumeControl = new();
+            VolumeControl volumeControl = new(contentControl);
             contentControl.Content = volumeControl;
         }
     }
