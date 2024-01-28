@@ -54,5 +54,11 @@ namespace UnitConverter
             GenericConversionControl massControl = new(contentControl, ConversionModes.ConversionMode.Mass);
             contentControl.Content = massControl;
         }
+
+        private void catTime_Click(object sender, RoutedEventArgs e)
+        {
+            GenericConversionControl TimeControl = new(contentControl, ConversionModes.ConversionMode.Time);
+            contentControl.Content = TimeControl;
+        }
     }
 }

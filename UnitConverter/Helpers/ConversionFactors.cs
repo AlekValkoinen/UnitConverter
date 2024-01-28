@@ -52,6 +52,26 @@ namespace UnitConverter.Helpers
             Pound,
             Stone
         }
+        public enum TimeUnit
+        {
+            MicroSecond,
+            Millisecond,
+            second,
+            minute,
+            hour,
+            day,
+            year
+        }
+        private static readonly Dictionary<TimeUnit, BigInteger> TimeConversionTable = new Dictionary<TimeUnit, BigInteger>
+        {
+            { TimeUnit.MicroSecond, 1 },
+            { TimeUnit.Millisecond, 1000 },
+            { TimeUnit.second, 1000000 },
+            { TimeUnit.minute, 60000000 },
+            { TimeUnit.hour,  3600000000 },
+            { TimeUnit.day, 86400000000 },
+            { TimeUnit.year, 31536000000000 }
+        };
 
         private static readonly Dictionary<MassUnit, BigInteger> MassConversionTable = new Dictionary<MassUnit, BigInteger>
         {
@@ -79,14 +99,14 @@ namespace UnitConverter.Helpers
         //some values may be off, I might need to use a smaller base unit to increase accuracy but for now this will do for approx.
         private static readonly Dictionary<VolumeUnit, BigInteger> VolumeConversionTable = new Dictionary<VolumeUnit, BigInteger>
         {
-            { VolumeUnit.Milliliter, 1 },
-            { VolumeUnit.Liter, 1000 },
-            { VolumeUnit.CubicMeter, 1000000 },
-            { VolumeUnit.CubicFoot, 283168 },  // Corrected value
-            { VolumeUnit.CubicYard, 764640 }, //corrected value (for simplicity of units and to avoid scientific notation in calculations I had went off liters for these, which meant off by a factor of 1000)
-            { VolumeUnit.Pint, 473 }, //This is approximate for integer use, actual value 473.2
-            { VolumeUnit.Quart, 946 }, //Also approx for integer use, actual value 946.4
-            { VolumeUnit.Gallon, 3785 }
+            { VolumeUnit.Milliliter, 10 },
+            { VolumeUnit.Liter, 10000 },
+            { VolumeUnit.CubicMeter, 10000000 },
+            { VolumeUnit.CubicFoot, 2831680 },  // Corrected value
+            { VolumeUnit.CubicYard, 7646400 }, //corrected value (for simplicity of units and to avoid scientific notation in calculations I had went off liters for these, which meant off by a factor of 1000)
+            { VolumeUnit.Pint, 4732 }, //This is approximate for integer use, actual value 473.2
+            { VolumeUnit.Quart, 9464 }, //Also approx for integer use, actual value 946.4
+            { VolumeUnit.Gallon, 37850 }
         };
 
         /** PRESERVE THIS We may want to revert to using decimal in the future, we will figure out our rounding errors later.
@@ -144,6 +164,10 @@ namespace UnitConverter.Helpers
         public Dictionary<MassUnit, BigInteger> GetMassTable()
         {
             return MassConversionTable;
+        }
+        public Dictionary<TimeUnit, BigInteger> GetTimeTable()
+        {
+            return TimeConversionTable;
         }
 
         //genericized this stuff so I can in theory use the same function as long as I have an Enum and a Dict

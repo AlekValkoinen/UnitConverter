@@ -56,5 +56,16 @@ namespace UnitConverter.Helpers
             unitList.Add(new UnitInfo<ConversionFactors.MassUnit>("Stone", ConversionFactors.MassUnit.Stone));
             return unitList;
         }
+        public static List<object> PopulateTimeUnitList(List<object> unitList)
+        {
+            unitList.Add(new UnitInfo<ConversionFactors.TimeUnit>("Micro Second", ConversionFactors.TimeUnit.MicroSecond));
+            unitList.Add(new UnitInfo<ConversionFactors.TimeUnit>("MilliSecond", ConversionFactors.TimeUnit.Millisecond));
+            unitList.Add(new UnitInfo<ConversionFactors.TimeUnit>("Second", ConversionFactors.TimeUnit.second));
+            unitList.Add(new UnitInfo<ConversionFactors.TimeUnit>("Minute", ConversionFactors.TimeUnit.minute));
+            unitList.Add(new UnitInfo<ConversionFactors.TimeUnit>("Hour", ConversionFactors.TimeUnit.hour));
+            unitList.Add(new UnitInfo<ConversionFactors.TimeUnit>("Day", ConversionFactors.TimeUnit.day));
+            unitList.Add(new UnitInfo<ConversionFactors.TimeUnit>("Year", ConversionFactors.TimeUnit.year));
+            return unitList;
+        }
     }
 }

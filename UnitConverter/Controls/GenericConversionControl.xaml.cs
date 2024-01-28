@@ -50,6 +50,9 @@ namespace UnitConverter.Controls
                 case ConversionModes.ConversionMode.Mass:
                     Units = UnitLists.PopulateMassUnitList(Units);
                     break;
+                case ConversionModes.ConversionMode.Time:
+                    Units = UnitLists.PopulateTimeUnitList(Units);
+                    break;
                 // Add more cases for other modes as needed
                 default:
                     throw new ArgumentException("Invalid mode", nameof(Mode));
@@ -101,6 +104,9 @@ namespace UnitConverter.Controls
                 case ConversionModes.ConversionMode.Mass:
                     unit = from == true ? fromSelection.SelectedItem as UnitInfo<ConversionFactors.MassUnit> : toSelection.SelectedItem as UnitInfo<ConversionFactors.MassUnit>;
                     return unit;
+                case ConversionModes.ConversionMode.Time:
+                    unit = from == true ? fromSelection.SelectedItem as UnitInfo<ConversionFactors.TimeUnit> : toSelection.SelectedItem as UnitInfo<ConversionFactors.TimeUnit>;
+                    return unit;
             }
             return null;
         }
@@ -115,7 +121,9 @@ namespace UnitConverter.Controls
                 case ConversionModes.ConversionMode.Volume:
                     return factors.GetVolumeTable();
                 case ConversionModes.ConversionMode.Mass:
-                    return factors.GetMassTable(); 
+                    return factors.GetMassTable();
+                case ConversionModes.ConversionMode.Time:
+                    return factors.GetTimeTable();
             }
             return null;
         }
