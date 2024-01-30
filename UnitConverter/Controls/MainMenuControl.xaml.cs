@@ -60,5 +60,11 @@ namespace UnitConverter
             GenericConversionControl TimeControl = new(contentControl, ConversionModes.ConversionMode.Time);
             contentControl.Content = TimeControl;
         }
+
+        private void catTemp_Click(object sender, RoutedEventArgs e)
+        {
+            GenericConversionControl tempControl = new(contentControl, ConversionModes.ConversionMode.Temperature);
+            contentControl.Content = tempControl;
+        }
     }
 }

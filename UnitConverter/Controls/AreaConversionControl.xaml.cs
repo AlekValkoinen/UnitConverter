@@ -54,8 +54,8 @@ namespace UnitConverter.Controls
                 //we have a value to convert, now we need to determine which entry from the list to use, Let's see if we can do this a better way for the future.
                 //now to try to convert
                 ConversionFactors conversions = new();
-                UnitInfo<ConversionFactors.AreaUnit> fromUnit = fromSelection.SelectedItem as UnitInfo<ConversionFactors.AreaUnit>;
-                UnitInfo<ConversionFactors.AreaUnit> toUnit = toSelection.SelectedItem as UnitInfo<ConversionFactors.AreaUnit>;
+                UnitInfo<ConversionFactors.AreaUnit>? fromUnit = fromSelection.SelectedItem as UnitInfo<ConversionFactors.AreaUnit>;
+                UnitInfo<ConversionFactors.AreaUnit>? toUnit = toSelection.SelectedItem as UnitInfo<ConversionFactors.AreaUnit>;
                 if (fromUnit != null && toUnit != null)
                 {
                     ToTextBox.Text = conversions.Convert((decimal)valToConvert, fromUnit.Unit, toUnit.Unit, conversions.GetAreaTable()).ToString();

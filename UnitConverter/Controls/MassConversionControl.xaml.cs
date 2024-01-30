@@ -54,8 +54,8 @@ namespace UnitConverter.Controls
             if(inputValue != 0f)
             {
                 ConversionFactors conversion = new();
-                UnitInfo<ConversionFactors.MassUnit> fromUnit = fromSelection.SelectedItem as UnitInfo<ConversionFactors.MassUnit>;
-                UnitInfo<ConversionFactors.MassUnit> toUnit = toSelection.SelectedItem as UnitInfo<ConversionFactors.MassUnit>;
+                UnitInfo<ConversionFactors.MassUnit>? fromUnit = fromSelection.SelectedItem as UnitInfo<ConversionFactors.MassUnit>;
+                UnitInfo<ConversionFactors.MassUnit>? toUnit = toSelection.SelectedItem as UnitInfo<ConversionFactors.MassUnit>;
                 if (fromUnit != null && toUnit != null)
                 {
                     ToTextBox.Text = conversion.Convert((decimal)inputValue, fromUnit.Unit, toUnit.Unit, conversion.GetMassTable()).ToString();

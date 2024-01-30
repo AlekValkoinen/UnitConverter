@@ -55,8 +55,8 @@ namespace UnitConverter
             if (inputValue != 0f)
             {
                 ConversionFactors conversion = new();
-                UnitInfo<ConversionFactors.LengthUnit> fromUnit = fromSelection.SelectedItem as UnitInfo<ConversionFactors.LengthUnit>;
-                UnitInfo<ConversionFactors.LengthUnit> toUnit = toSelection.SelectedItem as UnitInfo<ConversionFactors.LengthUnit>;
+                UnitInfo<ConversionFactors.LengthUnit>? fromUnit = fromSelection.SelectedItem as UnitInfo<ConversionFactors.LengthUnit>;
+                UnitInfo<ConversionFactors.LengthUnit>? toUnit = toSelection.SelectedItem as UnitInfo<ConversionFactors.LengthUnit>;
 
                 if (fromUnit != null && toUnit != null)
                 {

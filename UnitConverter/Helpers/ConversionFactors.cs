@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Automation.Text;
 
 namespace UnitConverter.Helpers
 {
@@ -61,6 +63,12 @@ namespace UnitConverter.Helpers
             hour,
             day,
             year
+        }
+        public enum TempUnit
+        {
+            Celcius,
+            Fahrenheit,
+            Kelvin
         }
         private static readonly Dictionary<TimeUnit, BigInteger> TimeConversionTable = new Dictionary<TimeUnit, BigInteger>
         {
@@ -190,5 +198,84 @@ namespace UnitConverter.Helpers
             }
             throw new InvalidOperationException($"Unsupported units: {fromUnit} to {toUnit}");
         }
+
+        //I could combine several of these the way I did C to K, this works for now, tired brain doesn't write ideal code.
+        //Another option is if converting from F, Convert to C, then determine if to K is needed, then do C to K,
+        /**This might look like
+            if(fromUnit == tempUnit.Fahrenheit)
+            {
+                if(toUnit == tempUnit.Celcius)
+                {
+                    return fToC(value);
+                }
+                if(toUnit == tempUnit.Kelvin)
+                {
+                    return cToK(fToC(value));
+                }
+            }
+        This does reduce readability to a small degree, but it also makes it more compact and elimates a functional repeat as F to K first converts to C anyway.
+        **/
+        public decimal ConvertTemp(decimal value, ConversionFactors.TempUnit fromUnit, ConversionFactors.TempUnit toUnit)
+        {
+            if(fromUnit == TempUnit.Fahrenheit)
+            {
+                if (toUnit == TempUnit.Celcius)
+                { 
+                    return fToC(value); 
+                }
+                if (toUnit == TempUnit.Kelvin)
+                {
+                    return fToK(value);
+                }
+                return 1;
+            }
+            if (fromUnit == TempUnit.Celcius)
+            {
+                if (toUnit == TempUnit.Fahrenheit)
+                {
+                    return cToF(value);
+                }
+                if (toUnit == TempUnit.Kelvin)
+                {
+                    return cToK(value, true);
+                }
+                return 1;
+            }
+            if (fromUnit == TempUnit.Kelvin)
+            {
+                if (toUnit == TempUnit.Fahrenheit)
+                {
+                    return kToF(value);
+                }
+                if (toUnit == TempUnit.Celcius)
+                {
+                    return cToK(value, false);
+                }
+                return 1;
+            }
+            return 0;
+        }
+        private decimal fToK(decimal value)
+        {
+            return (value - 32m) * (5m / 9m) + 273.15m;
+        }
+        private decimal fToC(decimal value)
+        {
+            return (value - 32m) * (5m / 9m);
+        }
+        private decimal cToF(decimal value)
+        {
+            return value * 1.8m + 32m;
+        }
+        private decimal kToF(decimal value)
+        {
+            return value - 273.15m * 1.8m + 32m;
+        }
+        private decimal cToK(decimal value, bool to)
+        {
+            return to == true ? value + 273.15m : value - 273.15m;
+        }
+
     }
+
 }

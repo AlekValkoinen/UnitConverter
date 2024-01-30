@@ -24,6 +24,8 @@ namespace UnitConverter.Controls
         List<object> Units = new();
         ContentControl Controller;
         ConversionModes.ConversionMode Mode;
+        int regularDec = 6;
+        int tempDec = 2;
         public GenericConversionControl(ContentControl controller, ConversionModes.ConversionMode mode)
         {
             InitializeComponent();
@@ -53,6 +55,10 @@ namespace UnitConverter.Controls
                 case ConversionModes.ConversionMode.Time:
                     Units = UnitLists.PopulateTimeUnitList(Units);
                     break;
+                case ConversionModes.ConversionMode.Temperature:
+                    Units = UnitLists.PopulateTempUnitList(Units);
+                break;
+
                 // Add more cases for other modes as needed
                 default:
                     throw new ArgumentException("Invalid mode", nameof(Mode));
@@ -73,9 +79,19 @@ namespace UnitConverter.Controls
                 var toUnit = castUnitType(Mode, false);
                 var conversionTable = getDictionary(Mode, conversion);
                 //fromUnit = fromSelection.SelectedItem;
-                if (fromUnit != null && toUnit != null)
+                if (fromUnit != null 
+                    && toUnit != null 
+                    && conversionTable != null 
+                    && Mode != ConversionModes.ConversionMode.Temperature)
                 {
-                    ToTextBox.Text = conversion.Convert((decimal)inputValue, fromUnit.Unit, toUnit.Unit, conversionTable).ToString();
+                    ToTextBox.Text = conversion.Convert((decimal)inputValue, fromUnit!.Unit, toUnit!.Unit, conversionTable).ToString();
+                }
+                if (toUnit != null 
+                    && fromUnit != null 
+                    && conversionTable != null 
+                    && Mode == ConversionModes.ConversionMode.Temperature)
+                {
+                    ToTextBox.Text = Math.Round(conversion.ConvertTemp((decimal)inputValue, fromUnit!.Unit, toUnit!.Unit), tempDec).ToString();
                 }
             }
         }
@@ -88,27 +104,30 @@ namespace UnitConverter.Controls
         //Helper function
         private dynamic castUnitType(ConversionModes.ConversionMode mode, bool from)
         {
-            dynamic unit;
+            dynamic? unit;
             switch (mode)
             {
                
                 case ConversionModes.ConversionMode.Length:
                     unit = from == true ? fromSelection.SelectedItem as UnitInfo<ConversionFactors.LengthUnit> : toSelection.SelectedItem as UnitInfo<ConversionFactors.LengthUnit>;
-                    return unit;
+                    return unit!;
                 case ConversionModes.ConversionMode.Area:
                     unit = from == true ? fromSelection.SelectedItem as UnitInfo<ConversionFactors.AreaUnit> : toSelection.SelectedItem as UnitInfo<ConversionFactors.AreaUnit>;
-                    return unit;
+                    return unit!;
                 case ConversionModes.ConversionMode.Volume:
                     unit = from == true ? fromSelection.SelectedItem as UnitInfo<ConversionFactors.VolumeUnit> : toSelection.SelectedItem as UnitInfo<ConversionFactors.VolumeUnit>;
-                    return unit;
+                    return unit!;
                 case ConversionModes.ConversionMode.Mass:
                     unit = from == true ? fromSelection.SelectedItem as UnitInfo<ConversionFactors.MassUnit> : toSelection.SelectedItem as UnitInfo<ConversionFactors.MassUnit>;
-                    return unit;
+                    return unit!;
                 case ConversionModes.ConversionMode.Time:
                     unit = from == true ? fromSelection.SelectedItem as UnitInfo<ConversionFactors.TimeUnit> : toSelection.SelectedItem as UnitInfo<ConversionFactors.TimeUnit>;
-                    return unit;
+                    return unit!;
+                case ConversionModes.ConversionMode.Temperature:
+                    unit = from == true ? fromSelection.SelectedItem as UnitInfo<ConversionFactors.TempUnit> : toSelection.SelectedItem as UnitInfo<ConversionFactors.TempUnit>;
+                    return unit!;
             }
-            return null;
+            return null!;
         }
         private dynamic getDictionary(ConversionModes.ConversionMode mode, ConversionFactors factors)
         {
@@ -125,7 +144,7 @@ namespace UnitConverter.Controls
                 case ConversionModes.ConversionMode.Time:
                     return factors.GetTimeTable();
             }
-            return null;
+            return null!;
         }
         //private dynamic GetSelectedUnits(ConversionModes.ConversionMode mode, bool from)
         //{

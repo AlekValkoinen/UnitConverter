@@ -53,8 +53,8 @@ namespace UnitConverter.Controls
             if (value != 0f)
             {
                 ConversionFactors conversion = new();
-                UnitInfo<ConversionFactors.VolumeUnit> fromUnit = fromSelection.SelectedItem as UnitInfo<ConversionFactors.VolumeUnit>;
-                UnitInfo<ConversionFactors.VolumeUnit> toUnit = toSelection.SelectedItem as UnitInfo<ConversionFactors.VolumeUnit>;
+                UnitInfo<ConversionFactors.VolumeUnit>? fromUnit = fromSelection.SelectedItem as UnitInfo<ConversionFactors.VolumeUnit>;
+                UnitInfo<ConversionFactors.VolumeUnit>? toUnit = toSelection.SelectedItem as UnitInfo<ConversionFactors.VolumeUnit>;
                 if (fromUnit != null && toUnit != null)
                 {
                     ToTextBox.Text = conversion.Convert((decimal)value, fromUnit.Unit, toUnit.Unit, conversion.GetVolumeTable()).ToString();

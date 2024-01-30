@@ -67,5 +67,12 @@ namespace UnitConverter.Helpers
             unitList.Add(new UnitInfo<ConversionFactors.TimeUnit>("Year", ConversionFactors.TimeUnit.year));
             return unitList;
         }
+        public static List<object> PopulateTempUnitList(List<object> unitList)
+        {
+            unitList.Add(new UnitInfo<ConversionFactors.TempUnit>("Fahrenheit", TempUnit.Fahrenheit));
+            unitList.Add(new UnitInfo<ConversionFactors.TempUnit>("Celcius", TempUnit.Celcius));
+            unitList.Add(new UnitInfo<ConversionFactors.TempUnit>("Kelvin", TempUnit.Kelvin));
+            return unitList;
+        }
     }
 }
